@@ -69,7 +69,8 @@ The output should be in the format 'Language:<detected language>', in example: '
         };
         db.UserQuestionInsight.Add(insight);
         await db.SaveChangesAsync();
-        _logger.LogInformation($"Added insight: {insight.Question}");
+        var sanitizedQuestion = insight.Question.Replace(Environment.NewLine, "").Replace("\n", "").Replace("\r", "");
+        _logger.LogInformation($"Added insight: {sanitizedQuestion}");
         return "OK";
     }
 

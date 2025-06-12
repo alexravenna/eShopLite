@@ -83,7 +83,7 @@ public class MemoryContext
         return true;
     }
 
-    public async Task<SearchResponse> Search(string search, Context db)
+    public virtual async Task<SearchResponse> Search(string search, Context db)
     {
         if (!_isMemoryCollectionInitialized)
         {

@@ -46,11 +46,12 @@ public static class WeatherEndPoints
 
             response.WeatherCondition =  weather is null
                 ? $"Could not retrieve weather data for {city}"
-                : $"Current temperature in {city} is {weather.temperature}°C with wind speed {weather.windspeed} km/h.";
+                : $"Current temperature in {city} is {weather.temperature}Â°C with wind speed {weather.windspeed} km/h.";
         }
         catch (Exception ex)
         {
-            logger.LogError(ex, $"Error retrieving weather data for {city}");
+            var sanitizedCity = city.Replace(Environment.NewLine, "").Replace("\n", "").Replace("\r", "");
+            logger.LogError(ex, $"Error retrieving weather data for {sanitizedCity}");
             response.WeatherCondition = $"Error retrieving weather data: {ex.Message}";
         }
         return response;
